@@ -1,24 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
     Portal.portalType selectedPortal = Portal.portalType.normal;
-
+    bool selected = false;
     public GameObject portalPrefab;
 
-    void SelectNormalPortal()
+    public void SelectNormalPortal()
     {
         selectedPortal = Portal.portalType.normal;
+        selected = true;
     }
-    void SelectLowGravityPortal()
+    public void SelectLowGravityPortal()
     {
         selectedPortal = Portal.portalType.lowGravity;
+        selected = true;
     }
-    void SelectHighGravityPortal()
+    public void SelectHighGravityPortal()
     {
         selectedPortal = Portal.portalType.highGravity;
+        selected = true;
     }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && selected)
+        {
+            selected = false;
+            Vector3 temp = Input.mousePosition;
+            temp.z = 0 - Camera.main.transform.position.z;
+            GameObject portal = Instantiate(portalPrefab, Camera.main.ScreenToWorldPoint(temp), Quaternion.identity);
+            portal.GetComponent<Portal>().type = selectedPortal;
+            portal.GetComponent<Portal>().UpdateVisuals();
+        }
+    }
+
 
 }

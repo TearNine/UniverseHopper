@@ -6,7 +6,7 @@ public class Portal : MonoBehaviour
 {
     public enum portalType { normal, lowGravity, highGravity };
     public portalType type;
-
+    public List<Material> materialList;
 
 
     void OnTriggerEnter(Collider c)
@@ -28,4 +28,10 @@ public class Portal : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    public void UpdateVisuals()
+    {
+        gameObject.GetComponent<Renderer>().material = materialList[(int)type];
+    }
+
 }
