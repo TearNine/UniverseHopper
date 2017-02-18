@@ -11,6 +11,7 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
+        Physics.gravity = new Vector3(0, -9.8f, 0);
         Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
         switch (type)
         {
