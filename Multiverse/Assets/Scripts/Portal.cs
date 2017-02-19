@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public enum portalType { normal, lowGravity, highGravity, walkOnWalls};
+    public enum portalType { normal, lowGravity, highGravity, walkOnWalls };
     public portalType type;
     public List<Material> materialList;
 
@@ -12,6 +12,8 @@ public class Portal : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         Physics.gravity = new Vector3(0, -9.8f, 0);
+        UniverseHopper temp = GameObject.FindGameObjectWithTag("Player").GetComponent<UniverseHopper>();
+        temp.direction = temp.wowDirection;
         Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
         switch (type)
         {

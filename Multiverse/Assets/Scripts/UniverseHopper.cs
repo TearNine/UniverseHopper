@@ -30,7 +30,10 @@ public class UniverseHopper : MonoBehaviour
             {
                 case "Vertical":
                     direction = -direction;
-                    rb.velocity = -rb.velocity * 2f;
+                    wowDirection = direction;
+                    Vector3 tempVector = rb.velocity;
+                    tempVector.x = -tempVector.x;
+                    rb.velocity = tempVector;
                     break;
                 case "Horizontal":
                     if (c.gameObject.transform.position.y < transform.position.y)
